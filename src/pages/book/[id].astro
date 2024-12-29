@@ -1,6 +1,10 @@
 ---
 import { getCollection, render } from "astro:content";
+import { SHOW_BUY_BUTTON } from "astro:env/server";
+
 import Layout from "../../layouts/Layout.astro";
+import AmazonLogo from "../../components/AmazonLogo.astro";
+
 
 export async function getStaticPaths(){
     const books = await getCollection("books");
@@ -15,23 +19,49 @@ export async function getStaticPaths(){
 }
 
 const { book } = Astro.props;
-const { data } = book;
+const { data, slug } = book;
 const { title, author, img, readtime, description, buy } = data;
 
 const {Content} = await render(book)
 ---
 
-<Layout>
+<Layout title={`${title} - Library Books`} >
     <div class="flex gap-12">
         <aside class="flex flex-col gap-4 items-center">
-            <img class="rounded w-72 h-auto" src={`/${img}`} alt={title} />
-            <!-- enlace para comprar -->
+            <a href="/" class="hover:underline opacity-70"><i class='bx bx-left-arrow-alt'></i> Regresar</a>
+            <img class="rounded w-72 h-auto" src={`/${img}`} alt={title} transition:name={`image-${slug}`}/>
+            <span id="score"></span>
+            {
+                SHOW_BUY_BUTTON && buy && (
+                    <a href={buy} 
+                        class=" text-balance inline-flex gap-2 items-center bg-yellow-400 border-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 active:bg-yellow-600 transition font-bold duration-200 ease-in-out hover:scale-105 jsutify-center text-center"
+                        title="Comprar libro"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class='bx bxl-amazon'></i> Comprar en Amazon
+                    </a>
+                )
+            }
         </aside>
         <main class="max-w-3xl">
-            <h1 class="text-4xl font-bold mb-4">{title}</h1>
-            <div>
+            <h1 class="text-4xl font-bold mb-4" transition:name={`title-${slug}`}>{title}</h1>
+            <div class="prose prose:inverse">
                 <Content />
             </div>
         </main>
     </div>
 </Layout>
+
+<script>
+    // client JS execution, import env variables client side
+    import { SCORE_API_ENDPOINT } from "astro:env/client";
+    const scoreElement = document.querySelector("#score");
+
+    fetch(SCORE_API_ENDPOINT)
+        .then( res => res.text())
+        .then( scoreValue => {
+            if(scoreElement)
+                scoreElement.innerHTML = `Puntuación: ${scoreValue}/ 5 <i class='bx bxs-star text-yellow-400'></i>`;
+        })
+</script>
