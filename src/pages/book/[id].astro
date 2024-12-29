@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import { SHOW_BUY_BUTTON } from "astro:env/server";
 
 import Layout from "../../layouts/Layout.astro";
-import AmazonLogo from "../../components/AmazonLogo.astro";
+import BookScore from "../../components/BookScore.astro";
 
 
 export async function getStaticPaths(){
@@ -23,14 +23,24 @@ const { data, slug } = book;
 const { title, author, img, readtime, description, buy } = data;
 
 const {Content} = await render(book)
+
+export const prerender = true;
+
 ---
 
 <Layout title={`${title} - Library Books`} >
     <div class="flex gap-12">
         <aside class="flex flex-col gap-4 items-center">
-            <a href="/" class="hover:underline opacity-70"><i class='bx bx-left-arrow-alt'></i> Regresar</a>
+            <a href="/" class="hover:underline opacity-70"><i class='bx bx-left-arrow-alt'></i> Back</a>
             <img class="rounded w-72 h-auto" src={`/${img}`} alt={title} transition:name={`image-${slug}`}/>
-            <span id="score"></span>
+            <!-- server islands begin -->
+            <BookScore server:defer id={slug}>
+                <span class="text-xs opacity-70" id="score" slot="fallback">
+                    Loading...
+                </span>
+            </BookScore>
+            <!-- server islands end -->
+            
             {
                 SHOW_BUY_BUTTON && buy && (
                     <a href={buy} 
@@ -39,7 +49,7 @@ const {Content} = await render(book)
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <i class='bx bxl-amazon'></i> Comprar en Amazon
+                        <i class='bx bxl-amazon'></i> Buy on Amazon
                     </a>
                 )
             }
@@ -53,15 +63,3 @@ const {Content} = await render(book)
     </div>
 </Layout>
 
-<script>
-    // client JS execution, import env variables client side
-    import { SCORE_API_ENDPOINT } from "astro:env/client";
-    const scoreElement = document.querySelector("#score");
-
-    fetch(SCORE_API_ENDPOINT)
-        .then( res => res.text())
-        .then( scoreValue => {
-            if(scoreElement)
-                scoreElement.innerHTML = `Puntuación: ${scoreValue}/ 5 <i class='bx bxs-star text-yellow-400'></i>`;
-        })
-</script>
