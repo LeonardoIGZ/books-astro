@@ -1,0 +1,14 @@
+---
+    // import env variables server side
+    import { SCORE_API_ENDPOINT } from "astro:env/server";
+
+    const response = await fetch(SCORE_API_ENDPOINT)
+    const scoreValue = await response.text()
+
+    
+
+---
+
+<span class="text-xs" id="score">
+    Score: {scoreValue.trim()}/5 <i class='bx bxs-star text-yellow-400'></i>
+</span>
