@@ -1,10 +1,12 @@
 ---
-title: Clean Code A Handbook of Agile Software Craftsmanship
+title: "Clean Code: A Handbook of Agile Software Craftsmanship"
 author: Robert C. Martin
 img: clean_code.jpg
 readtime: 820
 description: Una guía esencial para escribir código limpio, eficiente y sostenible, ideal para desarrolladores que buscan mejorar sus habilidades.
-buy: https://www.amazon.com.mx/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882
+buy:
+  mx: https://www.amazon.com.mx/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882
+  us: https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882
 ---
 
 Robert C. Martin, conocido como "Uncle Bob", nos presenta principios, patrones y prácticas para crear código limpio y de alta calidad.  

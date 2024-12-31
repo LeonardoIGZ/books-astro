@@ -1,0 +1,21 @@
+---
+const MEX = "MX";
+
+const country = Astro.request.headers.get("X-Vercel-IP-Country") ?? "MX";
+
+const storeCountry = country === MEX ? "mx" : "us";
+const countryName = country === MEX ? "México" : "Estados Unidos";
+
+const { buy } = Astro.props;
+const url = buy[storeCountry];
+---
+
+<a
+    href={url}
+    class="text-balance inline-flex gap-2 items-center bg-yellow-400 border-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 active:bg-yellow-600 transition font-bold duration-200 ease-in-out hover:scale-105 jsutify-center text-center"
+    title="Comprar libro"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+    <i class="bx bxl-amazon"></i> Buy on Amazon {countryName}
+</a>

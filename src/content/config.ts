@@ -9,7 +9,10 @@ const books = defineCollection({
         img: z.string(),
         readtime: z.number(),
         description: z.string(),
-        buy: z.string().url(),
+        buy: z.object({
+            mx: z.string().url(),
+            us: z.string().url()
+        }),
     })
 })
 

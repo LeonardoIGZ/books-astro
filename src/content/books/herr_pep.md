@@ -4,7 +4,9 @@ author: Martí Perarnau
 img: herr_pep.jpg
 readtime: 658
 description: Una crónica íntima que revela los éxitos, problemas y obsesiones de Pep Guardiola durante su tiempo en el Bayern de Múnich.
-buy: https://www.amazon.com.mx/Herr-Pep-Marti-Perarnau/dp/8415242638
+buy:
+  mx: https://www.amazon.com.mx/Herr-Pep-Marti-Perarnau/dp/8415242638
+  us: https://www.amazon.com/Herr-Pep-Mart%C3%AD-Perarnau/dp/190971525X
 ---
 
 Martí Perarnau ofrece un acceso exclusivo al vestuario del Bayern de Múnich durante la temporada 2013-2014, narrando la dedicación, pasión y métodos de Pep Guardiola.  
