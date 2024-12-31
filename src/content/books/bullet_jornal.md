@@ -4,7 +4,9 @@ author: Ryder Carroll
 img: metodo_bullet_journal.jpg
 readtime: 520
 description: Una guía completa para organizar tu vida y alcanzar tus metas utilizando el popular método Bullet Journal.
-buy: https://www.amazon.com.mx/El-m%C3%A9todo-Bullet-Journal-presente-ebook/dp/B07G5DP4Q3
+buy:
+  mx: https://www.amazon.com.mx/M%C3%A9todo-Bullet-Journal-Organizar-Potencial/dp/8417963102
+  us: https://www.amazon.com/Bullet-Journal-Method-Track-Past/dp/0525533338
 ---
 
 Un enfoque revolucionario para gestionar tu tiempo, tus tareas y tus objetivos de vida.  
